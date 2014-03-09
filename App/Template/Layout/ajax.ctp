@@ -1,8 +1,5 @@
 <?php
 /**
- *
- * PHP 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -16,10 +13,4 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 ?>
-<?php
-$content = explode("\n", $content);
-
-foreach ($content as $line):
-	echo '<p> ' . $line . "</p>\n";
-endforeach;
-?>
+<?php echo $this->fetch('content'); ?>

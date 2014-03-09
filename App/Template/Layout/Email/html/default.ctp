@@ -1,8 +1,5 @@
 <?php
 /**
- *
- * PHP 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -15,24 +12,15 @@
  * @since         CakePHP(tm) v 0.10.0.1076
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-use Cake\Core\Configure;
 ?>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html>
 <head>
-<?php echo $this->Html->charset(); ?>
-<title><?php echo $page_title; ?></title>
-
-<?php if (Configure::read('debug') == 0): ?>
-<meta http-equiv="Refresh" content="<?php echo $pause; ?>;url=<?php echo $url; ?>"/>
-<?php endif; ?>
-<style><!--
-P { text-align:center; font:bold 1.1em sans-serif }
-A { color:#444; text-decoration:none }
-A:HOVER { text-decoration: underline; color:#44E }
---></style>
+	<title><?= $this->fetch('title'); ?></title>
 </head>
 <body>
-<p><a href="<?php echo $url; ?>"><?php echo $message; ?></a></p>
+	<?= $this->fetch('content'); ?>
+
+	<p>This email was sent using the <a href="http://cakephp.org">CakePHP Framework</a></p>
 </body>
 </html>

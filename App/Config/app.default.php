@@ -20,6 +20,7 @@ $config = [
  * - encoding - The encoding used for HTML + database connections.
  * - base - The base directory the app resides in. If false this
  *   will be auto detected.
+ * - dir - Name of app directory.
  * - webroot - The webroot directory.
  * - www_root - The file path to webroot.
  * - baseUrl - To configure CakePHP *not* to use mod_rewrite and to
@@ -32,7 +33,7 @@ $config = [
  * - imageBaseUrl - Web path to the public images directory under webroot.
  * - cssBaseUrl - Web path to the public css directory under webroot.
  * - jsBaseUrl - Web path to the public js directory under webroot.
- * - paths - Configure paths for non class based resources. Supports the `plugin` and `view`
+ * - paths - Configure paths for non class based resources. Supports the `plugins` and `templates`
  *   subkeys, which allow the definition of paths for plugins and view templates respectively.
  */
 	'App' => [
@@ -49,7 +50,7 @@ $config = [
 		'jsBaseUrl' => 'js/',
 		'paths' => [
 			'plugins' => [ROOT . '/Plugin/'],
-			'views' => [APP . 'View/'],
+			'templates' => [APP . 'Template/'],
 		],
 	],
 
@@ -63,7 +64,6 @@ $config = [
 	'Security' => [
 		'salt' => '__SALT__',
 	],
-
 
 /**
  * Apply timestamps with the last modified time to static assets (js, css, images).
@@ -151,7 +151,6 @@ $config = [
 		'trace' => true,
 	],
 
-
 /**
  * Email configuration.
  *
@@ -210,7 +209,8 @@ $config = [
  */
 	'Datasources' => [
 		'default' => [
-			'className' => 'Cake\\Database\\Driver\\Mysql',
+			'className' => 'Cake\Database\Connection',
+			'driver' => 'Cake\Database\Driver\Mysql',
 			'persistent' => false,
 			'host' => 'localhost',
 			'login' => 'my_app',
@@ -224,7 +224,8 @@ $config = [
 		 * The test connection is used during the test suite.
 		 */
 		'test' => [
-			'className' => 'Cake\\Database\\Driver\\Mysql',
+			'className' => 'Cake\Database\Connection',
+			'driver' => 'Cake\Database\Driver\Mysql',
 			'persistent' => false,
 			'host' => 'localhost',
 			'login' => 'my_app',
@@ -240,17 +241,16 @@ $config = [
  */
 	'Log' => [
 		'debug' => [
-			'className' => 'Cake\\Log\\Engine\\FileLog',
+			'className' => 'Cake\Log\Engine\FileLog',
 			'file' => 'debug',
 			'levels' => ['notice', 'info', 'debug'],
 		],
 		'error' => [
-			'className' => 'Cake\\Log\\Engine\\FileLog',
+			'className' => 'Cake\Log\Engine\FileLog',
 			'file' => 'error',
 			'levels' => ['warning', 'error', 'critical', 'alert', 'emergency'],
 		],
 	],
-
 
 /**
  *
@@ -273,7 +273,10 @@ $config = [
  *    that can be used with `session_save_handler`.  Using this option will automatically add `session.save_handler`
  *    to the ini array.
  * - `autoRegenerate` - Enabling this setting, turns on automatic renewal of sessions, and
- *    sessionids that change frequently. See Cake\Model\Datasource\Session::$requestCountdown.
+ *    sessionids that change frequently.
+ * - `requestCountdown` - Number of requests that can occur during a session time
+ *    without the session being renewed. Only used when config value `autoRegenerate`
+ *    is set to true. Default to 10.
  * - `ini` - An associative array of additional ini values to set.
  *
  * The built in defaults are:
@@ -283,9 +286,9 @@ $config = [
  * - 'database' - Uses CakePHP's database sessions.
  * - 'cache' - Use the Cache class to save sessions.
  *
- * To define a custom session handler, save it at /app/Model/Datasource/Session/<name>.php.
- * Make sure the class implements `Cake\Model\Datasource\Session\SessionHandlerInterface`
- * and set Session.handler to <name>
+ * To define a custom session handler, save it at /app/Network/Session/<name>.php.
+ * Make sure the class implements PHP's `SessionHandlerInterface` and se
+ * Session.handler to <name>
  *
  * To use database sessions, run the app/Config/Schema/sessions.php schema using
  * the cake shell command: cake schema create Sessions

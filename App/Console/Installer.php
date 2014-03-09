@@ -1,7 +1,5 @@
 <?php
 /**
- * PHP 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -47,7 +45,7 @@ class Installer {
  */
 	public static function createAppConfig($dir, $io) {
 		$appConfig = $dir . '/App/Config/app.php';
-		$defaultConfig = $dir . '/App/Config/app.php.default';
+		$defaultConfig = $dir . '/App/Config/app.default.php';
 		if (!file_exists($appConfig)) {
 			copy($defaultConfig, $appConfig);
 			$io->write('Created `Config/app.php` file');
@@ -64,9 +62,7 @@ class Installer {
  * @return void
  */
 	public static function setTmpPermissions($dir, $io) {
-		/**
-		 * Change the permissions on a path and output the results.
-		 */
+		// Change the permissions on a path and output the results.
 		$changePerms = function ($path, $perms, $io) {
 			// Get current permissions in decimal format so we can bitmask it.
 			$currentPerms = octdec(substr(sprintf('%o', fileperms($path)), -4));

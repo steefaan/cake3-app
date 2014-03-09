@@ -14,30 +14,29 @@
  */
 namespace App\Config;
 
-// Use composer to load the autoloader.
-$root = dirname(dirname(__DIR__));
-if (file_exists($root . '/vendor/autoload.php')) {
-	require $root . '/vendor/autoload.php';
-}
-
-// If you can't use composer, you can use CakePHP's classloader
-// to autoload your application and the framework. You will
-// also need to add autoloaders for each Plugin you use.
-// This code expects that cakephp will be
-// setup in vendor/cakephp/cakephp.
-/*
-require $root . '/vendor/cakephp/cakephp/Cake/Core/ClassLoader.php';
-(new \Cake\Core\ClassLoader('App', $root))->register();
-(new \Cake\Core\ClassLoader('Cake', $root . '/vendor/cakephp/cakephp'))->register();
-*/
-unset($root);
-
-
 /**
  * Configure paths required to find CakePHP + general filepath
  * constants
  */
 require __DIR__ . '/paths.php';
+
+// Use composer to load the autoloader.
+if (file_exists(ROOT . '/vendor/autoload.php')) {
+	require ROOT . '/vendor/autoload.php';
+}
+
+// If composer is not used, use CakePHP's classloader to autoload the framework
+// and the application. You will also need setup autoloading for plugins by
+// passing `autoload' => true for `Plugin::loadAll()` or `Plugin::load()`
+//
+// If you are using a custom namespace, you'll need to set it here as well.
+if (!class_exists('Cake\Core\Configure')) {
+	require CAKE . 'Core/ClassLoader.php';
+	$loader = new \Cake\Core\ClassLoader;
+	$loader->register();
+	$loader->addNamespace('Cake', CAKE);
+	$loader->addNamespace('App', APP);
+}
 
 /**
  * Bootstrap CakePHP.
@@ -48,15 +47,15 @@ require __DIR__ . '/paths.php';
  * - Registering the CakePHP autoloader.
  * - Setting the default application paths.
  */
-require CORE_PATH . 'Cake/bootstrap.php';
+require CAKE . 'bootstrap.php';
 
-use Cake\Core\App;
 use Cake\Cache\Cache;
-use Cake\Console\ConsoleErrorHandler;
-use Cake\Core\Configure;
 use Cake\Configure\Engine\PhpConfig;
+use Cake\Console\ConsoleErrorHandler;
+use Cake\Core\App;
+use Cake\Core\Configure;
 use Cake\Core\Plugin;
-use Cake\Database\ConnectionManager;
+use Cake\Datasource\ConnectionManager;
 use Cake\Error\ErrorHandler;
 use Cake\Log\Log;
 use Cake\Network\Email\Email;
@@ -74,24 +73,12 @@ try {
 	Configure::config('default', new PhpConfig());
 	Configure::load('app.php', 'default', false);
 
-	/**
-	 * Load an environment local configuration file.
-	 * You can use this file to provide local overrides to your
-	 * shared configuration.
-	 */
+	// Load an environment local configuration file.
+	// You can use this file to provide local overrides to your
+	// shared configuration.
 	// Configure::load('app.local.php', 'default');
 } catch (\Exception $e) {
-	die('Unable to load Config/app.php. Create it by copying Config/app.php.default to Config/app.php.');
-}
-
-/**
- * Configure an autoloader for the App namespace.
- *
- * Use App\Controller\AppController as a test to see if composer
- * support is being used.
- */
-if (!class_exists('App\Controller\AppController')) {
-	(new \Cake\Core\ClassLoader(Configure::read('App.namespace'), dirname(APP)))->register();
+	die('Unable to load Config/app.php. Create it by copying Config/app.default.php to Config/app.php.');
 }
 
 /**
@@ -113,7 +100,6 @@ if (php_sapi_name() == 'cli') {
 } else {
 	(new ErrorHandler(Configure::consume('Error')))->register();
 }
-
 
 /**
  * Set the full base url.
@@ -139,7 +125,6 @@ ConnectionManager::config(Configure::consume('Datasources'));
 Email::configTransport(Configure::consume('EmailTransport'));
 Email::config(Configure::consume('Email'));
 Log::config(Configure::consume('Log'));
-
 
 /**
  * Custom Inflector rules, can be set to correctly pluralize or singularize table, model, controller names or whatever other

@@ -51,7 +51,7 @@ define('WWW_ROOT', ROOT . DS . WEBROOT_DIR . DS);
 /**
  * Path to the tests directory.
  */
-define('TESTS', APP . 'Test' . DS);
+define('TESTS', ROOT . DS . 'Test' . DS);
 
 /**
  * Path to the temporary files directory.
@@ -79,4 +79,4 @@ define('CAKE_CORE_INCLUDE_PATH', ROOT . '/vendor/cakephp/cakephp');
  * Path to the cake directory.
  */
 define('CORE_PATH', CAKE_CORE_INCLUDE_PATH . DS);
-define('CAKE', CORE_PATH . 'Cake' . DS);
+define('CAKE', CORE_PATH . 'src' . DS);
