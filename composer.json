@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "cakephp/cakephp": "3.0.*-dev",
+        "phpunit/phpunit": "3.7.*",
         "php": ">=5.4"
     },
     "suggest": {
@@ -19,5 +20,8 @@
     },
     "scripts": {
         "post-install-cmd": "App\\Console\\Installer::postInstall"
+    },
+    "config": {
+        "vendor-dir": "Vendor"
     }
 }
