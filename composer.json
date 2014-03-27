@@ -24,5 +24,8 @@
     },
     "scripts": {
         "post-install-cmd": "App\\Console\\Installer::postInstall"
+    },
+    "config": {
+        "vendor-dir": "vendor"
     }
 }

@@ -73,6 +73,7 @@ use Cake\Utility\Inflector;
 try {
 	Configure::config('default', new PhpConfig());
 	Configure::load('app.php', 'default', false);
+
 } catch (\Exception $e) {
 	die('Unable to load Config/app.php. Create it by copying Config/app.default.php to Config/app.php.');
 }
@@ -80,7 +81,8 @@ try {
 // Load an environment local configuration file.
 // You can use this file to provide local overrides to your
 // shared configuration.
-//Configure::load('app_local.php', 'default');
+Configure::load('app_local.php', 'default');
+Configure::load('app_private.php', 'default');
 
 /**
  * Set server timezone to UTC. You can change it to another timezone of your
@@ -156,3 +158,5 @@ Request::addDetector('tablet', function($request) {
  * Plugin::load('DebugKit'); //Loads a single plugin named DebugKit
  *
  */
+
+require 'E:\PHP\wamp\www\work\app30\app\vendor\autoload.php';
