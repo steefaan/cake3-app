@@ -133,11 +133,12 @@ Log::config(Configure::consume('Log'));
  * Setup detectors for mobile and tablet.
  */
 Request::addDetector('mobile', function($request) {
-	return (new \Detection\MobileDetect())->isMobile();
+	$detector = new \Detection\MobileDetect();
+	return $detector->isMobile();
 });
-
 Request::addDetector('tablet', function($request) {
-	return (new \Detection\MobileDetect())->isTablet();
+	$detector = new \Detection\MobileDetect();
+	return $detector->isTablet();
 });
 
 /**
