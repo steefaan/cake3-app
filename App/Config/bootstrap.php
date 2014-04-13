@@ -159,5 +159,4 @@ Request::addDetector('tablet', function($request) {
  * Plugin::load('DebugKit'); //Loads a single plugin named DebugKit
  *
  */
-
-require 'E:\PHP\wamp\www\work\app30\app\vendor\autoload.php';
+Plugin::loadAll();
