@@ -2,3 +2,4 @@
 /App/Config/app.php
 /tmp/*
 /composer.lock
+/App/Config/app_private.php
