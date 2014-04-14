@@ -81,6 +81,14 @@ class ArticlesController extends AppController {
 		}
 	}
 
+	public function slug() {
+		$Articles = TableRegistry::get('Articles');
+
+		$article = $Articles->find()->find('slugged', ['slug' => 'foo'])->first();
+		debug($article);
+		die();
+	}
+
 	/**
 	 * @return void
 	 */

@@ -28,6 +28,8 @@ class ArticlesTable extends AppTable {
 		$this->belongsTo('Users');
 		$this->hasMany('Comments');
 
+		$this->addBehavior('Slugged');
+
 		parent::initialize($config);
 	}
 
