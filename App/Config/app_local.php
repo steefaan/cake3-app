@@ -14,4 +14,10 @@ $config = [
 		'salt' => '123456567890',
 	],
 
+	'FormConfig' => array(
+		'templates' => array(
+			'dateWidget' => '{{day}}{{month}}{{year}}{{hour}}{{minute}}{{second}}{{meridian}}',
+		)
+	)
+
 ];
