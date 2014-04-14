@@ -24,6 +24,28 @@ class ArticlesController extends AppController {
 	}
 
 	/**
+	 * Test how entity works with forms and field.
+	 *
+	 * @return void
+	 */
+	public function add() {
+		$articlesTable = TableRegistry::get('Articles');
+		$article = $articlesTable->newEntity();
+		$this->set(compact('article'));
+	}
+
+	/**
+	 * Test how it works with entity + custom fields.
+	 *
+	 * @return void
+	 */
+	public function form() {
+		$articlesTable = TableRegistry::get('Articles');
+		$article = $articlesTable->newEntity();
+		$this->set(compact('article'));
+	}
+
+	/**
 	 * @return void
 	 */
 	public function save() {
