@@ -21,12 +21,14 @@ class InputShell extends AppShell {
 		$this->out('You said: ' . $result);
 
 		$this->hr();
-		$this->out('Time: ' . time());
+		$this->out('Time: ' . time(), 0);
 		for ($i = 1; $i < 10; $i++) {
 			sleep(1);
-			$this->_io->overwrite('Time: ' . time());
+			$this->_io->overwrite('Time: ' . time(), 0);
 		}
-		$this->out('Done');
+		$this->nl();
+		$this->hr();
+		$this->out('Test Done');
 	}
 
 /**
