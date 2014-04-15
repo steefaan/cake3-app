@@ -26,8 +26,7 @@ class InputShell extends AppShell {
 			sleep(1);
 			$this->_io->overwrite('Time: ' . time(), 0);
 		}
-		$this->nl();
-		$this->hr();
+		$this->out();
 		$this->out('Test Done');
 	}
 
