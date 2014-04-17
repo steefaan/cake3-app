@@ -2,3 +2,5 @@
 /tmp/*
 /composer.lock
 /App/Config/app_private.php
+/phpunit.phar
+/phpunit.xml
