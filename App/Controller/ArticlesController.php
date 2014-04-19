@@ -54,6 +54,7 @@ class ArticlesController extends AppController {
 
 		$data = array(
 			'username' => 'xx yy',
+			'position' => 'master chef'
 		);
 		$user = $users->newEntity($data);
 

@@ -12,5 +12,4 @@ use Cake\Console\Shell;
  *
  */
 class AppShell extends Shell {
-
 }
