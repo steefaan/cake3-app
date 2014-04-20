@@ -20,8 +20,18 @@ class StringTest extends TestCase {
 		unset($this->Text);
 	}
 
-	public function testCreate() {
-		$x = $this->Telegram->createClient();
+	public function testContactList() {
+		$Client = $this->Telegram->createClient();
+
+		$contactList = $Client->getContactList();
+		debug($contactList);
+	}
+
+	public function _testDialog() {
+		$Client = $this->Telegram->createClient();
+
+		$unreadMessages = $Client->getDialogList();
+		debug($unreadMessages);
 	}
 
 }
