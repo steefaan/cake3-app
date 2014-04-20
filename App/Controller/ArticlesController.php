@@ -74,7 +74,7 @@ class ArticlesController extends AppController {
 		$article = $articles->newEntity($data);
 		$article->comments = [
 			new Comment(['title' => 'foo', 'content' => 'Best post ever']),
-			new Comment(['title' => 'bar', 'content' => 'I really like this.']),
+			new Comment(['title' => 'bar', 'content' => 'I really like this.', 'index' => 2]),
 		];
 
 		if (!$articles->save($article)) {

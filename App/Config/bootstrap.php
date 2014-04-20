@@ -159,4 +159,4 @@ Request::addDetector('tablet', function($request) {
  * Plugin::load('DebugKit'); //Loads a single plugin named DebugKit
  *
  */
-Plugin::loadAll();
+Plugin::loadAll(array('Telegram' => array('autoload' => true)));
